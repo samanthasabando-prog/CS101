@@ -17,6 +17,8 @@ let
 
 let_small <- letters[1:26]
 let_small
+#[1] "a" "b" "c" "d" "e" "f" "g" "h" "i" "j" "k" "l" "m" "n" "o" "p" "q" "r" "s" "t" "u" "v" "w" "x" "y" "z"
+
 
 #A first eleven
 eleven<-LETTERS[1:11]
@@ -46,7 +48,7 @@ let_between
 
 
 ```
-```{r vectors}
+```{r vector}
 #A weather
 city<-c("Tuguegarao City","Manila","Iloilo City","Tacloban","Samal Island","Davao City")
 city
