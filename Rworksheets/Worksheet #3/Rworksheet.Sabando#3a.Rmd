@@ -12,64 +12,58 @@ knitr::opts_chunk$set(echo = TRUE)
 ```{r vectors}
 let<-LETTERS[1:26]
 let
-#[1] "A" "B" "C" "D" "E" "F" "G" "H" "I" "J" "K" "L" "M" "N" "O" "P" "Q" "R" "S" "T" "U" "V" "W" "X" "Y"
-#[26] "Z"
 
 let_small <- letters[1:26]
 let_small
-#[1] "a" "b" "c" "d" "e" "f" "g" "h" "i" "j" "k" "l" "m" "n" "o" "p" "q" "r" "s" "t" "u" "v" "w" "x" "y" "z"
 
 
-#A first eleven
+#A You need to produce a vector that contains the first 11 letters.
 eleven<-LETTERS[1:11]
 eleven
-#[1]"A" "B" "C" "D" "E" "F" "G" "H" "I" "J" "K"
 
-#B odd_letters
+
+#B Produce a vector that contains the odd numbered letters.
 odd<-LETTERS[seq(1,26, by=2)]
 odd
-#[1]"A" "C" "E" "G" "I" "K" "M" "O" "Q" "S" "U" "W" "Y"
 
-#C vowels
+
+#C Produce a vector that contains the vowels
 vowels<-LETTERS[LETTERS%in% c("A","E","I","O","U")]
 vowels
-#[1] "A" "E" "I" "O" "U"
 
-#D last5
+
+#D Produce a vector that contains the last 5 lowercase letters.
 last_5<-letters[22:26]
 last_5
-#"v" "w" "x" "y" "z"
 
-#E letters between 15 and 24
+
+#E Produce a vector that contains letters between 15 to 24 letters in lowercase.
 let_between<-letters[15:24]
 let_between
-#"o" "p" "q" "r" "s" "t" "u" "v" "w" "x"
+
 
 
 
 ```
 ```{r vector}
+#Create a vector(not a dataframe) with the average temperatures in April
+avg_temps <- c(42, 39, 34, 34, 30, 27)
+avg_temps
+
+
 #A weather
 city<-c("Tuguegarao City","Manila","Iloilo City","Tacloban","Samal Island","Davao City")
 city
-#[1] "Tuguegarao"   "City"         "Manila"       "Iloilo City"  "Tacloban"     "Samal Island"
-#[7] "Davao City" 
+
 
 #B temp
 temp<-c(42,39,34,34,30,27)
 temp
-#[1] 42 39 34 34 30 27
+
 
 #C weather
 weather<-data.frame(city, temp)
 weather
-#output
-#Tuguegarao City	  42			
-#Manila       	    39			
-#Iloilo City	      34			
-#Tacloban	          34			
-#Samal Island	      30			
-#Davao City	        27	
 
 #D names
 names(weather)<-c("City", "Temperature")
@@ -77,27 +71,14 @@ weather
 
 #E str
 str(weather)
-#  City        Temperature
-#3 Iloilo City       34
-#4 Tacloban          34
 
 #F
 weather[3:4, ]
-#        City Temperature
-#3 Iloilo City          34
-#4    Tacloban          34
 
 #G highest to lowest
 weather[which.max(weather$Temperature), ]
 weather[which.min(weather$Temperature), ]
 
-#output highest
-#             City Temperature
-#1 Tuguegarao City          42
-
-#output lowest
-#         City Temperature
-#6 Davao City          27
 
 
 ```
@@ -107,110 +88,56 @@ weather[which.min(weather$Temperature), ]
 m <- matrix(c(1:8, 11:14), nrow = 3, ncol = 4)
 m
 
-# [,1] [,2] [,3] [,4]
-#[1,]    1    4    7   12
-#[2,]    2    5    8   13
-#[3,]    3    6   11   14
 
-#B
+#B Multiply the matrix by two.
 m2 <- m * 2
 m2
-#[,1] [,2] [,3] [,4]
-#[1,]    2    8   14   24
-#[2,]    4   10   16   26
-#[3,]    6   12   22   28
 
-#C
+
+#C content of row 2
 m[2, ]
-#[1]  2  5  8 13
 -366
 
-#D
+#D display the column 3 and column 4 in row 1 and row 2
 m[1:2, 3:4]
-#[1,]    7   12
-#[2,]    8   13
 
-#E
+
+#E display only the columns in 2 and 3, row 3
 m[3, 2:3]
-#[1]  6 11
 
-#F
+#F display only the columns 4
 m[, 4]
-#[1] 12 13 14
 
-#G
+#G g. Name the rows as isa, dalawa, tatlo and columns as uno, dos, tres, quatro
+#for the matrix that was created in b.
 rownames(m2) <- c("isa", "dalawa", "tatlo")
 colnames(m2) <- c("uno", "dos", "tres", "quatro")
 m2
-# uno dos tres quatro
-#isa      2   8   14     24
-#dalawa   4  10   16     26
-#tatlo    6  12   22     28
 
-#H
+#H new dimension
 dim(m) <- c(6, 2)
 m
-#[,1] [,2]
-#[1,]    1    7
-#[2,]    2    8
-#[3,]    3   11
-#[4,]    4   12
-#[5,]    5   13
-#[6,]    6   14
 ```
 
 ```{r array}
-#A
+# an array contains 1, 2, 3, 6, 7, 8, 9, 0, 3, 4, 5, 1
 values <- c(1, 2, 3, 6, 7, 8, 9, 0, 3, 4, 5, 1)
 values_repeated <- rep(values, 2)
 
+#A create a three-dimensional array with 4 columns and 2 rows.
 arr <- array(values_repeated, dim = c(2, 4, 3))
 arr
-#, , 1
 
-#     [,1] [,2] [,3] [,4]
-#[1,]    1    3    7    9
-#[2,]    2    6    8    0
-
-#, , 2
-#
-#    [,1] [,2] [,3] [,4]
-#[1,]    3    5    1    3
-#[2,]    4    1    2    6
-
-#, , 3
-
-#    [,1] [,2] [,3] [,4]
-#[1,]    7    9    3    5
-#[2,]    8    0    4    1
-
-#B
+#B Dimentions that the array have
 length(dim(arr))
-#[1] 3
 
-#C
+#C name the rows as lowercase letters and columns as uppercase letters starting from the A.
 rownames(arr) <- letters[1:2]            
 colnames(arr) <- LETTERS[1:4]
 dimnames(arr)[[3]] <- c("1st-Dimensional Array", "2nd-Dimensional Array", "3rd-Dimensional Array")
 
 arr
-#, , 1st-Dimensional Array
 
-#  A B C D
-#A 1 3 7 9
-#B 2 6 8 0
-
-#, , 2nd-Dimensional Array
-
-#  A B C D
-#A 3 5 1 3
-#B 4 1 2 6
-
-#, , 3rd-Dimensional Array
-
-#  A B C D
-#A 7 9 3 5
-#B 8 0 4 1
 
 
 ```
