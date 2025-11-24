@@ -1,0 +1,143 @@
+---
+title: "Rworksheet.Sabando#3a.Rmd"
+author: "Samantha L. Sabando"
+date: "2025-10-13"
+output: pdf_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+```{r vectors}
+let<-LETTERS[1:26]
+let
+
+let_small <- letters[1:26]
+let_small
+
+
+#A You need to produce a vector that contains the first 11 letters.
+eleven<-LETTERS[1:11]
+eleven
+
+
+#B Produce a vector that contains the odd numbered letters.
+odd<-LETTERS[seq(1,26, by=2)]
+odd
+
+
+#C Produce a vector that contains the vowels
+vowels<-LETTERS[LETTERS%in% c("A","E","I","O","U")]
+vowels
+
+
+#D Produce a vector that contains the last 5 lowercase letters.
+last_5<-letters[22:26]
+last_5
+
+
+#E Produce a vector that contains letters between 15 to 24 letters in lowercase.
+let_between<-letters[15:24]
+let_between
+
+
+
+
+```
+```{r vector}
+#Create a vector(not a dataframe) with the average temperatures in April
+avg_temps <- c(42, 39, 34, 34, 30, 27)
+avg_temps
+
+
+#A weather
+city<-c("Tuguegarao City","Manila","Iloilo City","Tacloban","Samal Island","Davao City")
+city
+
+
+#B temp
+temp<-c(42,39,34,34,30,27)
+temp
+
+
+#C weather
+weather<-data.frame(city, temp)
+weather
+
+#D names
+names(weather)<-c("City", "Temperature")
+weather
+
+#E str
+str(weather)
+
+#F
+weather[3:4, ]
+
+#G highest to lowest
+weather[which.max(weather$Temperature), ]
+weather[which.min(weather$Temperature), ]
+
+
+
+```
+
+```{r Matrices}
+#A
+m <- matrix(c(1:8, 11:14), nrow = 3, ncol = 4)
+m
+
+
+#B Multiply the matrix by two.
+m2 <- m * 2
+m2
+
+
+#C content of row 2
+m[2, ]
+-366
+
+#D display the column 3 and column 4 in row 1 and row 2
+m[1:2, 3:4]
+
+
+#E display only the columns in 2 and 3, row 3
+m[3, 2:3]
+
+#F display only the columns 4
+m[, 4]
+
+#G g. Name the rows as isa, dalawa, tatlo and columns as uno, dos, tres, quatro
+#for the matrix that was created in b.
+rownames(m2) <- c("isa", "dalawa", "tatlo")
+colnames(m2) <- c("uno", "dos", "tres", "quatro")
+m2
+
+#H new dimension
+dim(m) <- c(6, 2)
+m
+```
+
+```{r array}
+# an array contains 1, 2, 3, 6, 7, 8, 9, 0, 3, 4, 5, 1
+values <- c(1, 2, 3, 6, 7, 8, 9, 0, 3, 4, 5, 1)
+values_repeated <- rep(values, 2)
+
+#A create a three-dimensional array with 4 columns and 2 rows.
+arr <- array(values_repeated, dim = c(2, 4, 3))
+arr
+
+#B Dimentions that the array have
+length(dim(arr))
+
+#C name the rows as lowercase letters and columns as uppercase letters starting from the A.
+rownames(arr) <- letters[1:2]            
+colnames(arr) <- LETTERS[1:4]
+dimnames(arr)[[3]] <- c("1st-Dimensional Array", "2nd-Dimensional Array", "3rd-Dimensional Array")
+
+arr
+
+
+
+```
