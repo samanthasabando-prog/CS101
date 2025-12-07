@@ -1,0 +1,271 @@
+---
+title: "Rworksheet.Sabando#4b.Rmd"
+author: "Samantha L. Sabando"
+date: "2025-12-01"
+output: pdf_document
+---
+```{r}
+############################################################
+# 1
+############################################################
+# Vector A
+vectorA <- c(1, 2, 3, 4, 5)
+
+# 5x5 zero matrix
+M <- matrix(0, nrow = 5, ncol = 5)
+
+# Fill matrix using abs(i - j)
+for (i in 1:5) {
+  for (j in 1:5) {
+    M[i, j] <- vectorA[abs(i - j) + 1]
+  }
+}
+
+# Display matrix
+print(M)
+```
+```{r}
+############################################################
+# 2
+############################################################
+for (i in 1:5) {
+  for (j in 1:i) {
+    cat('"*"')
+  }
+  cat("\n")  
+}
+
+```
+```{r}
+############################################################
+# 3
+############################################################
+start <- as.numeric(readline(prompt = "Enter starting number: "))
+
+if (is.na(start)) {
+  cat("Invalid input! Please enter a numeric value.\n")
+} else {
+  # Initialize first two Fibonacci numbers
+  a <- 0
+  b <- 1
+ 
+  cat("Fibonacci sequence starting from", start, "up to 500:\n")
+ 
+  repeat {
+    # Only print numbers >= start
+    if (a >= start) {
+      cat(a, " ")
+    }
+   
+    # Stop if the next number will be greater than 500
+    if (a > 500) {
+      break
+    }
+# Generate next Fibonacci number
+    temp <- a + b
+    a <- b
+    b <- temp
+  }
+ 
+  cat("\nDone!\n")
+}
+```
+```{r}
+############################################################
+# 4
+############################################################
+#a For CSV and display first 6 rows
+shoe_data <- read.csv("shoe_data.csv")
+
+head(shoe_data)
+
+#b Subset for males and females
+male_subset <- shoe_data[shoe_data$Gender == "M", ]
+female_subset <- shoe_data[shoe_data$Gender == "F", ]
+male_subset
+female_subset
+
+# Count observations in each
+nrow(male_subset)
+nrow(female_subset)
+
+
+gender_count <- table(shoe_data$Gender)
+
+# Display counts
+gender_count
+
+#c Create a bar plot
+barplot(gender_count,
+        main = "Number of Males and Females in Household Data",
+        xlab = "Gender",
+        ylab = "Number of Individuals",
+        col = c("pink", "lavender"),
+        legend.text = TRUE,
+        args.legend = list(x = "topright", title = "Gender"))
+```
+```{r setup, include=FALSE}
+############################################################
+# 5
+############################################################
+expenses <- c(Food = 60, Electricity = 10, Savings = 5, Miscellaneous = 25)
+
+labels <- paste0(names(expenses),
+                 " (", round(100 * expenses / sum(expenses), 1), "%)")
+
+# Create pie chart
+pie(expenses,
+    main = "Monthly Expenses of Dela Cruz Family",
+    col = c("lavender", "skyblue", "pink", "turquoise"),
+    labels = labels,
+    clockwise = TRUE)
+
+legend("topright", legend = names(expenses), fill = c("red", "grey", "violet", "blue"))
+```
+```{r}
+############################################################
+# 6
+############################################################
+#iris dataset
+data(iris)
+
+#a Check structure
+str(iris)
+
+#b mean of the sepal.length,sepal.width,petal.length,and petal.width.
+iris_mean <- colMeans(iris[, 1:4])
+iris_mean
+
+
+#c Count species
+species_distribution <- table(iris$Species)
+species_distribution
+
+
+labels <- paste0(names(species_distribution),
+                 " (", species_distribution, " | ",
+                 round(100 * species_distribution / sum(species_distribution), 1), "%)")
+
+# Create pie chart
+pie(species_distribution,
+    main = "Species Distribution in Iris Dataset",
+    col = c("beige", "brown", "grey"),
+    labels = labels,
+    clockwise = TRUE)
+
+legend("topright", legend = names(species_distribution), fill = c("red", "blue", "violet"))
+
+
+#d Subset each species
+setosa <- subset(iris, Species == "setosa")
+versicolor <- subset(iris, Species == "versicolor")
+virginica <- subset(iris, Species == "virginica")
+
+#last 6 rows of each
+tail(setosa)
+tail(versicolor)
+tail(virginica)
+
+
+
+#e scatter_plot
+
+data(iris)
+
+iris$Species <- as.factor(iris$Species)
+
+
+colors <- c("setosa" = "lightgreen", "versicolor" = "red", "virginica" = "orange")
+symbols <- c("setosa" = 16, "versicolor" = 17, "virginica" = 18)
+
+# Create scatterplot
+plot(iris$Sepal.Length, iris$Sepal.Width,
+     col = colors[iris$Species],
+     pch = symbols[iris$Species],
+     xlab = "Sepal Length",
+     ylab = "Sepal Width",
+     main = "Iris Dataset",
+     sub = "Sepal width and length")
+
+legend("topright",
+       legend = levels(iris$Species),
+       col = colors,
+       pch = symbols)
+
+#f. Interpret the result.
+#Setosa species has wider sepal but shorter in length, the versicolor is in between or in average in  sepal width and sepal length, while the virginica has the longest sepal.
+#The clear separation among clusters suggests that Sepal.Length and Sepal.Width can help distinguish species, though there is some overlap between versicolor and virginica.
+```
+```{r}
+############################################################
+# 7 
+############################################################
+############################################################
+
+# 7
+
+############################################################
+
+# Install and load packages if missing
+
+if (!require(readxl)) {
+install.packages("readxl")
+library(readxl)
+} else {
+library(readxl)
+}
+
+if (!require(dplyr)) {
+install.packages("dplyr")
+library(dplyr)
+} else {
+library(dplyr)
+}
+
+# Load the Excel file
+
+alexa <- read_excel("/cloud/project/alexa_file.xlsx")
+alexa
+
+#a. Rename the white and black variants using gsub()
+alexa$variation <- gsub("Black +", "Black ", alexa$variation)
+alexa$variation <- gsub("White +", "White ", alexa$variation)
+head(alexa$variation, 10)
+
+#b. Count variations and save
+variations <- alexa %>% count(variation)
+variations
+
+save(variations, file = "variations.RData")
+
+#c. Create a barplot from variations
+barplot(variations$n,
+names.arg = variations$variation,
+col = "skyblue",
+main = "Variation Counts",
+xlab = "Variation Type",
+ylab = "Count",
+las = 2)
+
+# Separate black and white variations
+
+black <- variations %>% filter(grepl("^Black", variation))
+white <- variations %>% filter(grepl("^White", variation))
+
+# Combine counts into matrix for side-by-side barplot
+
+bw_matrix <- rbind(black$n, white$n)
+
+#d. Side-by-side barplot for black and white variations
+barplot(bw_matrix,
+beside = TRUE,
+names.arg = gsub("Black |White ", "", black$variation),
+col = c("blue", "lavender"),
+main = "Black vs White Variation Counts",
+xlab = "Variation Type",
+ylab = "Count")
+
+legend("topright",
+legend = c("Black", "White"),
+fill = c("blue", "lavender"))
+```

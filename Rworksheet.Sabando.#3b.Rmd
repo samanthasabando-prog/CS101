@@ -1,13 +1,10 @@
 ---
-title: "Rworksheet.Sabando#3b.Rmd"
+title: "Rworksheet.Sabando.#3b.Rmd"
 author: "Samantha L. Sabando"
-date: "2025-10-13"
+date: "2025-11-24"
 output: pdf_document
 ---
 
-```{r setup, include=FALSE}
-knitr::opts_chunk$set(echo = TRUE)
-```
 ```{r}
 # Create the dataset
 # Creating the dataset based on the given table
